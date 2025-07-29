@@ -1,0 +1,116 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+</edmx:Reference>
+<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+<edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+</edmx:Reference>
+<edmx:DataServices>
+<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="myservice">
+<Annotation Term="Core.Links">
+<Collection>
+<Record>
+<PropertyValue Property="rel" String="author"/>
+<PropertyValue Property="href" String="https://cap.cloud.sap"/>
+</Record>
+</Collection>
+</Annotation>
+<EntityContainer Name="EntityContainer">
+<EntitySet Name="Customer" EntityType="myservice.Customer">
+<NavigationPropertyBinding Path="address" Target="Address"/>
+</EntitySet>
+<EntitySet Name="Address" EntityType="myservice.Address">
+<NavigationPropertyBinding Path="customer" Target="Customer"/>
+</EntitySet>
+</EntityContainer>
+<EntityType Name="Customer">
+<Key>
+<PropertyRef Name="id"/>
+</Key>
+<Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+<Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+<Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+<Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+<Property Name="id" Type="Edm.String" Nullable="false"/>
+<Property Name="firstName" Type="Edm.String" MaxLength="30"/>
+<Property Name="lastName" Type="Edm.String" MaxLength="30"/>
+<Property Name="emailId" Type="Edm.String" MaxLength="30"/>
+<Property Name="mobileNumber" Type="Edm.String"/>
+<Property Name="dateOfBirth" Type="Edm.String"/>
+<Property Name="gender" Type="Edm.String"/>
+<Property Name="password" Type="Edm.String"/>
+<Property Name="Date" Type="Edm.DateTimeOffset"/>
+<NavigationProperty Name="address" Type="Collection(myservice.Address)" Partner="customer"/>
+</EntityType>
+<EntityType Name="Address">
+<Key>
+<PropertyRef Name="Id"/>
+</Key>
+<Property Name="Id" Type="Edm.String" Nullable="false"/>
+<Property Name="houseNo" Type="Edm.String"/>
+<Property Name="Street" Type="Edm.String"/>
+<Property Name="City" Type="Edm.String"/>
+<Property Name="State" Type="Edm.String"/>
+<Property Name="Country" Type="Edm.String"/>
+<Property Name="Pincode" Type="Edm.String"/>
+<NavigationProperty Name="customer" Type="myservice.Customer" Partner="address">
+<ReferentialConstraint Property="customer_id" ReferencedProperty="id"/>
+</NavigationProperty>
+<Property Name="customer_id" Type="Edm.String"/>
+<Property Name="mobileNumber" Type="Edm.String"/>
+</EntityType>
+<Annotations Target="myservice.Customer/createdAt">
+<Annotation Term="UI.HiddenFilter" Bool="true"/>
+<Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+<Annotation Term="Core.Immutable" Bool="true"/>
+<Annotation Term="Core.Computed" Bool="true"/>
+<Annotation Term="Common.Label" String="Created On"/>
+</Annotations>
+<Annotations Target="myservice.Customer/createdBy">
+<Annotation Term="UI.HiddenFilter" Bool="true"/>
+<Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+<Annotation Term="Core.Immutable" Bool="true"/>
+<Annotation Term="Core.Computed" Bool="true"/>
+<Annotation Term="Core.Description" String="User's unique ID"/>
+<Annotation Term="Common.Label" String="Created By"/>
+</Annotations>
+<Annotations Target="myservice.Customer/modifiedAt">
+<Annotation Term="UI.HiddenFilter" Bool="true"/>
+<Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+<Annotation Term="Core.Computed" Bool="true"/>
+<Annotation Term="Common.Label" String="Changed On"/>
+</Annotations>
+<Annotations Target="myservice.Customer/modifiedBy">
+<Annotation Term="UI.HiddenFilter" Bool="true"/>
+<Annotation Term="UI.ExcludeFromNavigationContext" Bool="true"/>
+<Annotation Term="Core.Computed" Bool="true"/>
+<Annotation Term="Core.Description" String="User's unique ID"/>
+<Annotation Term="Common.Label" String="Changed By"/>
+</Annotations>
+<Annotations Target="myservice.Customer/gender">
+<Annotation Term="Validation.AllowedValues">
+<Collection>
+<Record Type="Validation.AllowedValue">
+<Annotation Term="Core.SymbolicName" String="Male"/>
+<PropertyValue Property="Value" String="M"/>
+</Record>
+<Record Type="Validation.AllowedValue">
+<Annotation Term="Core.SymbolicName" String="Female"/>
+<PropertyValue Property="Value" String="F"/>
+</Record>
+<Record Type="Validation.AllowedValue">
+<Annotation Term="Core.SymbolicName" String="Other"/>
+<PropertyValue Property="Value" String="O"/>
+</Record>
+</Collection>
+</Annotation>
+</Annotations>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

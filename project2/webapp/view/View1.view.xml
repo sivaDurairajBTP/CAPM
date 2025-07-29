@@ -1,0 +1,57 @@
+<mvc:View controllerName="project2.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="Employee Details">
+     <VBox class="sapUiSmallMargin">
+    <Table id="simpleTable" items="{/Customer}" >
+      <headerToolbar>
+        <Toolbar>
+          <Title text="People List" level="H2"/>
+         <ToolbarSpacer/>
+   <SearchField width="20%" change="onSearchProducts"/>
+   
+         
+        </Toolbar>
+      </headerToolbar>
+
+      <columns>
+      <Column>
+          <Text text="ID"/>
+        </Column>
+        <Column>
+          <Text text="First Name"/>
+        </Column>
+        <Column>
+          <Text text="Last Name"/>
+        </Column>
+         <Column>
+          <Text text="Email"/>
+        </Column>
+          <Column>
+          <Text text="Joining Date"/>
+        </Column>
+      </columns>
+
+      <items>
+        <ColumnListItem type="Navigation"
+                press=".onPress">
+          <cells>
+             <Text text="{id}"/>
+            <Text text="{firstName}"/>
+            <Text text="{lastName}"/>
+            <Text text="{emailId}"/>
+             <!-- <Text text="{Date}"/> -->
+<Text text="{
+    path: 'Date',
+    type: 'sap.ui.model.odata.type.DateTimeOffset',
+    formatOptions: {
+        pattern: 'yyyy-MM-dd'
+    }
+}" />
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </VBox>
+    </Page>
+</mvc:View>

@@ -1,0 +1,69 @@
+<mvc:View
+    controllerName="project2.controller.ObjectPage"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+>
+<Page id="ObjectPage">
+<Bar id="_IDGenBar1">
+        <contentLeft>
+            <Title id="_IDGenTitle1"
+                text="Customer Details"
+                level="H1"
+                titleStyle="H3"
+            />
+        </contentLeft>
+    </Bar>
+    <List id="_IDGenList1" >
+        <ObjectListItem id="_IDGenObjectListItem1">
+            <attributes>
+                <ObjectAttribute id="_IDGenObjectAttribute1"
+                    class="bigFont"
+                    title="Customer ID"
+                    text="{id}"
+                />
+
+                <ObjectAttribute id="_IDGenObjectAttribute2"
+                    class="bigFont"
+                    title="Name of the Customer"
+                    text="{firstName}"
+                />
+
+            </attributes>
+        </ObjectListItem>
+    </List>
+    
+
+<Bar id="_IDGenBar2" class="space1">
+        <contentLeft>
+            <Title id="_IDGenTitle2"
+                text="Customer Contact Details"
+                level="H1"
+                titleStyle="H3"
+            />
+        </contentLeft>
+    </Bar>
+  <List items="{path: 'address'}">
+            <ObjectListItem>
+                <attributes>
+                    <!-- <ObjectAttribute class="bigFont" title="Address ID" text="{id}" /> -->
+
+                    <ObjectAttribute class="bigFont" title="house No" text="{path: 'ChildData>/houseNo'}" />
+
+                    <ObjectAttribute class="bigFont" title="Street" text="{path: 'ChildData>/Street'}" />
+
+                    <ObjectAttribute class="bigFont" title="City" text="{path: 'ChildData>/City'}" />
+                    <ObjectAttribute class="bigFont" title="Pincode" text="{path: 'ChildData>/Pincode'}" />
+
+                    <ObjectAttribute class="bigFont" title="State" text="{path: 'ChildData>/State'}" />
+
+                    <ObjectAttribute class="bigFont" title="Country" text="{path: 'ChildData>/Country'}" />
+
+                   
+
+                </attributes>
+            </ObjectListItem>
+        </List>
+
+    </Page>
+</mvc:View>
